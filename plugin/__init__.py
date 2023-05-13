@@ -27,6 +27,7 @@ import inspect
 import json
 import os
 import os.path
+import pathlib
 import platform
 import re
 import time
@@ -1930,7 +1931,7 @@ class AnkiConnect:
 
 # when run inside Anki, `__name__` would be either numeric,
 # or, if installed via `link.sh`, `AnkiConnectDev`
-if __name__ != "plugin":
+if __name__ != "plugin" or pathlib.Path(__file__).parent.parent.joinpath('.git').is_file():
     if platform.system() == "Windows" and anki_version == (2, 1, 50):
         util.patch_anki_2_1_50_having_null_stdout_on_windows()
 
